@@ -119,6 +119,24 @@ else()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic -Wextra -Wno-unknown-pragmas -std=c++11")
 endif()
 
+add_definitions(
+  -DBOOST_ASIO_STANDALONE
+  -DASIO_STANDALONE
+)
+
+if(ANDROID)
+  if(NOT SUPPORTS_CXX14 AND NOT SUPPORTS_CXX1Y)
+    add_definitions(
+      -DASIO_DISABLE_STD_STRING_VIEW
+    )
+  endif()
+  if(NOT "${ANDROID_STL}" STREQUAL "c++_shared" AND NOT "${ANDROID_STL}" STREQUAL "c++_static")
+    add_definitions(
+      -DASIO_DISABLE_MOVE
+    )
+  endif()
+endif()
+
 ###############################################################################
 # GCC colors if using CCache
 ###############################################################################
