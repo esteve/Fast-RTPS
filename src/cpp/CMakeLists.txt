@@ -175,7 +175,7 @@ if(TINYXML2_SOURCE_DIR)
     list(APPEND ${PROJECT_NAME}_source_files
         ${TINYXML2_SOURCE_DIR}/tinyxml2.cpp
         )
-    set_sources(../../thirdparty/tinyxml2/tinyxml2.cpp)
+    set_sources(${TINYXML2_SOURCE_DIR}/tinyxml2.cpp)
 endif()
 
 if(ANDROID)

@@ -13,7 +13,7 @@ if(TinyXML2_FOUND)
         set(TINYXML2_LIBRARY tinyxml2)
     endif()
 else()
-    if(THIRDPARTY)
+    if(THIRDPARTY OR ANDROID)
         set(TINYXML2_FROM_SOURCE ON)
     endif()
 
