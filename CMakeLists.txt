@@ -15,7 +15,7 @@
 ###############################################################################
 # CMake build rules for FastRTPS
 ###############################################################################
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.5)
 
 set(IS_TOP_LEVEL TRUE)
 if(PROJECT_SOURCE_DIR)
@@ -94,6 +94,10 @@ message(STATUS "Configuring ${PROJECT_NAME_LARGE}")
 message(STATUS "Version: ${PROJECT_VERSION}")
 message(STATUS "To change de version modify the file configure.ac")
 
+if(NOT DEFINED CMAKE_CXX_STANDARD)
+    set(CMAKE_CXX_STANDARD 14)
+endif()
+
 ###############################################################################
 # Generation of windows installers.
 ###############################################################################
@@ -125,16 +129,13 @@ add_definitions(
 )
 
 if(ANDROID)
-  if(NOT SUPPORTS_CXX14 AND NOT SUPPORTS_CXX1Y)
-    add_definitions(
-      -DASIO_DISABLE_STD_STRING_VIEW
-    )
-  endif()
-  if(NOT "${ANDROID_STL}" STREQUAL "c++_shared" AND NOT "${ANDROID_STL}" STREQUAL "c++_static")
-    add_definitions(
-      -DASIO_DISABLE_MOVE
-    )
-  endif()
+    if(CMAKE_CXX_STANDARD LESS 14)
+        add_definitions(-DASIO_DISABLE_STD_STRING_VIEW)
+    endif()
+
+    if(NOT ANDROID_STL STREQUAL "c++_shared" AND NOT ANDROID_STL STREQUAL "c++_static")
+        add_definitions(-DASIO_DISABLE_MOVE)
+    endif()
 endif()
 
 ###############################################################################
@@ -150,7 +151,6 @@ endif()
 # Test system configuration
 ###############################################################################
 include(${PROJECT_SOURCE_DIR}/cmake/common/check_configuration.cmake)
-check_stdcxx()
 check_compile_feature()
 check_endianness()
 

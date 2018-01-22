@@ -12,13 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-cmake_minimum_required(VERSION 2.8.12)
-
-if(NOT CMAKE_VERSION VERSION_LESS 3.0)
-    cmake_policy(SET CMP0048 NEW)
-endif()
-
-project(RTPSTest_as_socket)
+cmake_minimum_required(VERSION 3.5)
+project("RTPSTest_as_socket")
 
 # Find requirements
 if(NOT fastcdr_FOUND)
@@ -29,17 +24,7 @@ if(NOT fastrtps_FOUND)
     find_package(fastrtps REQUIRED)
 endif()
 
-# Set C++11
-include(CheckCXXCompilerFlag)
-if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANG OR
-        CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    check_cxx_compiler_flag(-std=c++11 SUPPORTS_CXX11)
-    if(SUPPORTS_CXX11)
-        add_compile_options(-std=c++11)
-    else()
-        message(FATAL_ERROR "Compiler doesn't support C++11")
-    endif()
-endif()
+set(CMAKE_CXX_STANDARD 11)
 
 message(STATUS "Configuring RTPSTest_as_socket...")
 file(GLOB RTPSTESTASSOCKET_SOURCES "*.cpp")
