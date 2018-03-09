@@ -26,7 +26,7 @@ namespace fastrtps{
 namespace rtps{
 
 NetworkFactory::NetworkFactory() : maxMessageSizeBetweenTransports_(0),
-    minSendBufferSize_(std::numeric_limits<uint32_t>::max())
+    minSendBufferSize_((std::numeric_limits<uint32_t>::max)())
 {
 }
 
@@ -94,7 +94,7 @@ bool NetworkFactory::BuildReceiverResources (const Locator_t& local, std::vector
 void NetworkFactory::RegisterTransport(const TransportDescriptorInterface* descriptor)
 {
     bool wasRegistered = false;
-    uint32_t minSendBufferSize = std::numeric_limits<uint32_t>::max();
+    uint32_t minSendBufferSize = (std::numeric_limits<uint32_t>::max)();
 
     if (auto concrete = dynamic_cast<const UDPv4TransportDescriptor*> (descriptor))
     {
