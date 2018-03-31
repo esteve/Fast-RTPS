@@ -10,7 +10,7 @@ if(TinyXML2_FOUND)
     if(NOT TINYXML2_LIBRARY AND TARGET tinyxml2)
         # in this case, we're probably using TinyXML2 version 5.0.0 or greater
         # in which case tinyxml2 is an exported target and we should use that
-        set(TINYXML2_LIBRARY tinyxml2)
+        set(TINYXML2_LIBRARY tinyxml2-test2)
     endif()
 else()
     if(THIRDPARTY)
