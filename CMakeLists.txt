@@ -115,6 +115,14 @@ if("${CMAKE_CXX_COMPILER_LAUNCHER}" STREQUAL "ccache" AND
     add_compile_options(-fdiagnostics-color=always)
 endif()
 
+if(NOT WIN32)
+  if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined")
+  elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-undefined,error")
+  endif()
+endif()
+
 ###############################################################################
 # Test system configuration
 ###############################################################################
