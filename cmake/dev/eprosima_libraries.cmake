@@ -67,6 +67,8 @@ macro(find_eprosima_package package)
                     "\${CMAKE_CXX_COMPILER_}"
                     "-DCMAKE_C_FLAGS:STRING=${CMAKE_C_FLAGS_}"
                     "-DCMAKE_CXX_FLAGS:STRING=${CMAKE_CXX_FLAGS_}"
+                    "-DCMAKE_SYSTEM_NAME=${CMAKE_SYSTEM_NAME}"
+                    "-DCMAKE_SYSTEM_VERSION=${CMAKE_SYSTEM_VERSION}"
                     ${ANDROID_BUILD_OPTIONS}
                     "-DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}"
                     "-DCMAKE_CROSSCOMPILING_EMULATOR=${CMAKE_CROSSCOMPILING_EMULATOR}"
