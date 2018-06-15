@@ -132,10 +132,6 @@ if(ANDROID)
     if(CMAKE_CXX_STANDARD LESS 14)
         add_definitions(-DASIO_DISABLE_STD_STRING_VIEW)
     endif()
-
-    if(NOT ANDROID_STL STREQUAL "c++_shared" AND NOT ANDROID_STL STREQUAL "c++_static")
-        add_definitions(-DASIO_DISABLE_MOVE)
-    endif()
 endif()
 
 ###############################################################################

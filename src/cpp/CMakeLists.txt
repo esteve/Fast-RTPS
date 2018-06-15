@@ -208,10 +208,9 @@ add_definitions(
 )
 
 if(ANDROID)
-  add_definitions(
-    -DASIO_DISABLE_MOVE
-    -DASIO_DISABLE_STD_STRING_VIEW
-  )
+    if(CMAKE_CXX_STANDARD LESS 14)
+        add_definitions(-DASIO_DISABLE_STD_STRING_VIEW)
+    endif()
 endif()
 
 set(${PROJECT_NAME}_include_dirs
