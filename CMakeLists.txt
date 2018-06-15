@@ -147,6 +147,7 @@ endif()
 # Test system configuration
 ###############################################################################
 include(${PROJECT_SOURCE_DIR}/cmake/common/check_configuration.cmake)
+check_stdcxx()
 check_compile_feature()
 check_endianness()
 
